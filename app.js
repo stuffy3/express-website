@@ -8,13 +8,16 @@ const PORT = process.env.PORT || 3000;
 const app = express();
 
 
-app.use(morgan('combined'));
+app.use(morgan('tiny'));
 app.use(express.static(path.join(__dirname, '/public/')));
 
+app.set('views', './src/views');
+app.set('view engine', 'ejs');
+
 app.get('/',(req, res) => {
-    res.send('Hello')
+    res.render('index', {title: 'Globalmantics', data: ['a', 'b' ,'c']})
 })
 
-app.listen(3000,() => {
-    debug(`docked on port 3000`)
+app.listen(PORT,() => {
+    debug(`docked on port ${PORT}`)
 });
